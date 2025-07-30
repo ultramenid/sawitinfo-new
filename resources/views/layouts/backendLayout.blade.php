@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$title}}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     @livewireStyles
+    @livewireScripts
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -19,7 +19,6 @@
 
     @yield('content')
 
-    @livewireScripts
     <x-toaster-hub />
 
 </body>

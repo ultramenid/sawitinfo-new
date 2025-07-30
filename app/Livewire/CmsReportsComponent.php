@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Masmerise\Toaster\Toaster;
 
 class CmsReportsComponent extends Component
 {
@@ -30,8 +31,8 @@ class CmsReportsComponent extends Component
         DB::table('reports')->where('id', $id)->delete();
 
         $message = 'Successfully deleting reports ';
-        $type = 'success'; //error, success
-        $this->emit('toast',$message, $type);
+        Toaster::success($message);
+
 
 
         $this->closeDelete();

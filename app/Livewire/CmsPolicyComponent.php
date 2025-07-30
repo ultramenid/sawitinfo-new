@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Masmerise\Toaster\Toast;
+use Masmerise\Toaster\Toaster;
 
 class CmsPolicyComponent extends Component
 {
@@ -31,8 +33,7 @@ class CmsPolicyComponent extends Component
         DB::table('policyregulation')->where('id', $id)->delete();
 
         $message = 'Successfully deleting policy & regulation ';
-        $type = 'success'; //error, success
-        $this->emit('toast',$message, $type);
+        Toaster::success($message);
 
 
         $this->closeDelete();
