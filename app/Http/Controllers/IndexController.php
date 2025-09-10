@@ -59,6 +59,7 @@ class IndexController extends Controller
     public function index(){
         // dd($this->getPosts());
         $posts = $this->getPosts();
+        dd($posts);
         $ngopinis = $this->getNgopini();
         $reports = $this->getReports();
         $description = '';
