@@ -9,59 +9,69 @@
     @include('partials.topbarMobile')
 
     {{-- hero --}}
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 sm:py-8 gap-10 ">
-        {{-- left side --}}
-        <div class="w-full">
-            <img src="{{ asset('storage/public/files/photos/'.$posts[0]->img) }}" alt="sawit.info" class="w-full object-center h-80 object-cover sm:px-4 px-0 ">
+    @if(!empty($posts) && isset($posts[0]))
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 sm:py-8 gap-10 ">
+            {{-- left side --}}
+            <div class="w-full">
+                <img src="{{ asset('storage/public/files/photos/'.$posts[0]->img) }}" alt="sawit.info" class="w-full object-center h-80 object-cover sm:px-4 px-0 ">
 
-            <div class="text-gray-500 space-x-6 flex sm:mt-6 mt-2 px-4">
-                {{-- <h1 class="font-semibold md:text-3xl text-md">{{$posts[0]->category}}</h1> --}}
-                <span class="font-semibold md:text-3xl text-md">•</span>
-                <h1 class="font-semibold md:text-3xl text-md">
-                    @php
-                        $date = \Carbon\Carbon::parse($posts[0]->publishdate)->locale(App::getLocale());
-                        $date->settings(['formatFunction' => 'translatedFormat']);
-                        echo $date->format('d F Y');
-                    @endphp</h1>
+                <div class="text-gray-500 space-x-6 flex sm:mt-6 mt-2 px-4">
+                    <span class="font-semibold md:text-3xl text-md">•</span>
+                    <h1 class="font-semibold md:text-3xl text-md">
+                        @php
+                            $date = \Carbon\Carbon::parse($posts[0]->publishdate)->locale(App::getLocale());
+                            $date->settings(['formatFunction' => 'translatedFormat']);
+                            echo $date->format('d F Y');
+                        @endphp
+                    </h1>
+                </div>
+
+                <a href="{{ route('slug', [app()->getLocale(),  $posts[0]->slug]) }}">
+                    <h1  class="text-wrap cursor-pointer px-4 sm:mt-6 mt-2 sm:mb-8 mb-3 md:text-5xl text-2xl font-semibold text-auriga-biru">
+                        {{$posts[0]->title}}
+                    </h1>
+                </a>
+                <a href="{{ route('slug', [app()->getLocale(),  $posts[0]->slug]) }}" class=" cursor-pointer px-4 text-auriga-biru sm:text-xl text-base font-semibold hover:cursor-pointer hover:underline ">
+                    READ THE ARTICLE
+                </a>
             </div>
 
-            <a href="{{ route('slug', [app()->getLocale(),  $posts[0]->slug]) }}"><h1  class="text-wrap cusrsor-pointer px-4 sm:mt-6 mt-2 sm:mb-8 mb-3 md:text-5xl text-2xl font-semibold text-auriga-biru">{{$posts[0]->title}}</h1></a>
-            <a href="{{ route('slug', [app()->getLocale(),  $posts[0]->slug]) }}" class=" cursor-pointer px-4 text-auriga-biru sm:text-xl text-base font-semibold hover:cursor-pointer hover:underline ">READ THE ARTICLE</a>
-        </div>
-
-        {{-- right side --}}
-        <div class="w-full px-4 sm:border-l-hero border-black">
-            <div class="md:px-10">
-                {{-- <h1 class="font-black text-auriga-biru text-4xl mb-2">Featured</h1> --}}
-                {{-- card --}}
-                @foreach($posts as $key => $data)
-                    @if($key > 0)
-                    <div class="py-2">
-                        <div class="text-gray-500 space-x-4 flex  ">
-                        {{-- <h1 class="font-semibold text-sm">{{$data->category}}</h1> --}}
-                            <span class="font-semibold text-sm">•</span>
-                            <h1 class="font-semibold text-sm">
-                                @php
-                                    $date = \Carbon\Carbon::parse($data->publishdate)->locale(App::getLocale());
-                                    $date->settings(['formatFunction' => 'translatedFormat']);
-                                    echo $date->format('d F Y');
-                                @endphp
-                            </h1>
-                            </h1>
-                        </div>
-                        <div class="flex  w-full justify-between mt-1 space-x-6  ">
-                            <img src="{{ asset('storage/public/files/photos/thumbnail/'.$data->img) }}" alt="sawit.info" class="md:w-5/12 w-6/12 sm:h-28 h-24 object-cover border border-gray-50">
-                            <a href="{{ route('slug', [app()->getLocale(),  $data->slug]) }}" class="text-wrap cursor-pointer text-auriga-biru sm:text-xl text-base font-bold">{{$posts[1]->title}}</a>
-                        </div>
-                        <div class="flex justify-end mt-4">
-                            <a href="{{ route('slug', [app()->getLocale(),  $data->slug]) }}" class="cursor-pointer text-auriga-biru font-bold sm:text-base text-sm">READ THE ARTICLE</a>
-                        </div>
-                    </div>
-                    @endif
-                @endforeach
+            {{-- right side --}}
+            <div class="w-full px-4 sm:border-l-hero border-black">
+                <div class="md:px-10">
+                    @foreach($posts as $key => $data)
+                        @if($key > 0)
+                            <div class="py-2">
+                                <div class="text-gray-500 space-x-4 flex  ">
+                                    <span class="font-semibold text-sm">•</span>
+                                    <h1 class="font-semibold text-sm">
+                                        @php
+                                            $date = \Carbon\Carbon::parse($data->publishdate)->locale(App::getLocale());
+                                            $date->settings(['formatFunction' => 'translatedFormat']);
+                                            echo $date->format('d F Y');
+                                        @endphp
+                                    </h1>
+                                </div>
+                                <div class="flex w-full justify-between mt-1 space-x-6  ">
+                                    <img src="{{ asset('storage/public/files/photos/thumbnail/'.$data->img) }}" alt="sawit.info" class="md:w-5/12 w-6/12 sm:h-28 h-24 object-cover border border-gray-50">
+                                    <a href="{{ route('slug', [app()->getLocale(),  $data->slug]) }}" class="text-wrap cursor-pointer text-auriga-biru sm:text-xl text-base font-bold">{{$data->title}}</a>
+                                </div>
+                                <div class="flex justify-end mt-4">
+                                    <a href="{{ route('slug', [app()->getLocale(),  $data->slug]) }}" class="cursor-pointer text-auriga-biru font-bold sm:text-base text-sm">READ THE ARTICLE</a>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
-    </div>
+    @else
+        {{-- fallback content if no posts --}}
+        <div class="max-w-6xl mx-auto text-center py-12">
+            <h2 class="text-2xl font-semibold text-gray-600">No articles available</h2>
+        </div>
+    @endif
+
 
     <div class="max-w-6xl mx-auto bg-auriga-biru flex w-full justify-between px-6 py-4">
         <a href="{{ route('insights', app()->getlocale() )}}" class=" cursor-pointer text-white font-semibold">VIEW ALL ARTICLES</a>
@@ -77,30 +87,42 @@
 
     {{-- ngopini --}}
     <div class="bg-auriga-hijau sm:py-20 py-6 relative mt-12 mb-12  px-4">
-        <div class=" max-w-6xl mx-auto grid sm:grid-cols-2 grid-cols-1 sm:gap- gap-0 ">
-            <div class="z-40">
-                <img src="{{ asset('storage/public/files/photos/'.$ngopinis->img) }}" alt="" class=" sm:h-80 h-60 w-full object-cover">
-            </div>
+        @if($ngopinis)
+        <div class="max-w-6xl mx-auto grid sm:grid-cols-2 grid-cols-1 sm:gap- gap-0">
+            @if($ngopinis->img)
+                <div class="z-40">
+                    <img src="{{ asset('storage/public/files/photos/'.$ngopinis->img) }}"
+                        alt=""
+                        class="sm:h-80 h-60 w-full object-cover">
+                </div>
+            @endif
+
             <div class="sm:px-10">
                 <div class="flex space-x-4 sm:mt-10 mt-4 items-center text-gray-200">
                     <h1 class="font-semibold sm:text-base text-sm">ngopini</h1>
                 </div>
+
                 <a href="{{ route('ngopini', [app()->getLocale(), $ngopinis->slug]) }}">
                     <h1 class="sm:mt-8 mt-5 sm:text-2xl text-xl font-bold text-white">
-                        {{$ngopinis->title}}
+                        {{ $ngopinis->title }}
                     </h1>
                 </a>
+
                 <div class="sm:mt-10 mt-5 text-white">
                     <a class="font-semibold text-sm">
-                    @php
-                        $date = \Carbon\Carbon::parse($ngopinis->publishdate)->locale(App::getLocale());
-                        $date->settings(['formatFunction' => 'translatedFormat']);
-                        echo $date->format('d F Y');
-                    @endphp
-                    </a><span> | </span><a>{{$ngopinis->description}}</a>
+                        @php
+                            $date = \Carbon\Carbon::parse($ngopinis->publishdate)->locale(App::getLocale());
+                            $date->settings(['formatFunction' => 'translatedFormat']);
+                            echo $date->format('d F Y');
+                        @endphp
+                    </a>
+                    <span> | </span>
+                    <a>{{ $ngopinis->description }}</a>
                 </div>
             </div>
         </div>
+        @endif
+
         <div class="absolute z-10  bottom-0 left-0   text-white w-3/12">
             <img src="{{ asset('img/elemen-light.png') }}" alt="auriga nusantara" class="z-10">
         </div>
