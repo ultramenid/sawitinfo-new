@@ -14,7 +14,7 @@ use App\Http\Middleware\PostController;
 use App\Http\Middleware\setLanguage;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/cms/login');
+Route::redirect('/', '/en');
 
 Route::middleware([checksession::class])->group(function () {
     Route::get('/cms/dashboard', [DashboardController::class, 'index']);
