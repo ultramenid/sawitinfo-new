@@ -12,11 +12,9 @@
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 sm:py-8 gap-10 ">
         {{-- left side --}}
         <div class="w-full">
-            @if($posts[0])
                 <img src="{{ asset('storage/public/files/photos/'.$posts[0]->img) }}"
                     alt="sawit.info"
                     class="w-full object-center h-80 object-cover sm:px-4 px-0 ">
-            @endif
 
 
             <div class="text-gray-500 space-x-6 flex sm:mt-6 mt-2 px-4">
