@@ -12,10 +12,7 @@
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 grid-cols-1 sm:py-8 gap-10 ">
         {{-- left side --}}
         <div class="w-full">
-                <img src="{{ asset('storage/public/files/photos/'.$posts[0]->img) }}"
-                    alt="sawit.info"
-                    class="w-full object-center h-80 object-cover sm:px-4 px-0 ">
-
+            <img src="{{ asset('storage/public/files/photos/'.$posts[0]->img) }}" alt="sawit.info" class="w-full object-center h-80 object-cover sm:px-4 px-0 ">
 
             <div class="text-gray-500 space-x-6 flex sm:mt-6 mt-2 px-4">
                 {{-- <h1 class="font-semibold md:text-3xl text-md">{{$posts[0]->category}}</h1> --}}
@@ -80,42 +77,33 @@
 
     {{-- ngopini --}}
     <div class="bg-auriga-hijau sm:py-20 py-6 relative mt-12 mb-12  px-4">
-       @if($ngopinis)
-        <div class="max-w-6xl mx-auto grid sm:grid-cols-2 grid-cols-1 sm:gap- gap-0">
-            @if($ngopinis->img)
-                <div class="z-40">
-                    <img src="{{ asset('storage/public/files/photos/'.$ngopinis->img) }}"
-                        alt=""
-                        class="sm:h-80 h-60 w-full object-cover">
-                </div>
-            @endif
-
+        <div class=" max-w-6xl mx-auto grid sm:grid-cols-2 grid-cols-1 sm:gap- gap-0 ">
+            <div class="z-40">
+                <img src="{{ asset('storage/public/files/photos/'.$ngopinis->img) }}" alt="" class=" sm:h-80 h-60 w-full object-cover">
+            </div>
             <div class="sm:px-10">
                 <div class="flex space-x-4 sm:mt-10 mt-4 items-center text-gray-200">
                     <h1 class="font-semibold sm:text-base text-sm">ngopini</h1>
                 </div>
-
                 <a href="{{ route('ngopini', [app()->getLocale(), $ngopinis->slug]) }}">
                     <h1 class="sm:mt-8 mt-5 sm:text-2xl text-xl font-bold text-white">
-                        {{ $ngopinis->title }}
+                        {{$ngopinis->title}}
                     </h1>
                 </a>
-
                 <div class="sm:mt-10 mt-5 text-white">
                     <a class="font-semibold text-sm">
-                        @php
-                            $date = \Carbon\Carbon::parse($ngopinis->publishdate)->locale(App::getLocale());
-                            $date->settings(['formatFunction' => 'translatedFormat']);
-                            echo $date->format('d F Y');
-                        @endphp
-                    </a>
-                    <span> | </span>
-                    <a>{{ $ngopinis->description }}</a>
+                    @php
+                        $date = \Carbon\Carbon::parse($ngopinis->publishdate)->locale(App::getLocale());
+                        $date->settings(['formatFunction' => 'translatedFormat']);
+                        echo $date->format('d F Y');
+                    @endphp
+                    </a><span> | </span><a>{{$ngopinis->description}}</a>
                 </div>
             </div>
         </div>
-        @endif
-
+        <div class="absolute z-10  bottom-0 left-0   text-white w-3/12">
+            <img src="{{ asset('img/elemen-light.png') }}" alt="auriga nusantara" class="z-10">
+        </div>
     </div>
     <div class="max-w-6xl mb-12 mx-auto bg-auriga-biru flex w-full justify-between px-6 py-4">
         <a href="{{ route('ngopinis', app()->getlocale() )}}" class="text-white font-semibold">VIEW ALL NGOPINI</a>
