@@ -33,7 +33,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'serve' => true,
+            'serve' => false, // root is storage/app/public (web-exposed): no signed PUT/GET storage routes
             'throw' => false,
             'report' => false,
         ],

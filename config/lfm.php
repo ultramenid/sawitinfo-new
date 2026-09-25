@@ -15,7 +15,8 @@ return [
     |--------------------------------------------------------------------------
      */
 
-    'use_package_routes'       => true,
+    // Registered explicitly in routes/web.php behind auth; package routes would add an unguarded duplicate.
+    'use_package_routes'       => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -59,7 +60,6 @@ return [
                 'image/png',
                 'image/gif',
                 'application/pdf',
-                'text/plain',
             ],
         ],
         'image' => [
